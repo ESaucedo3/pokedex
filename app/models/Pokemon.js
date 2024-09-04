@@ -65,7 +65,7 @@ export class Pokemon {
                     <p>${this.height} dm</p>
                   </div>
                   <div class="text-center">
-                    <button type="button" class="btn btn-outline-dark rounded-pill">Catch Em!</button>
+                    <button onclick="app." type="button" class="btn btn-outline-dark rounded-pill">Catch Em!</button>
                   </div>
                 </div>
               </div>`;
