@@ -1,6 +1,5 @@
 export class Pokemon {
   constructor(data) {
-    // FIXME data.whatever will need to be changed since their api could potentially name it something else
     this.name = data.name;
     this.nickname = data.nickname || 'Pokemon';
     this.img = data.img ?? data.sprites.front_default;
@@ -8,15 +7,21 @@ export class Pokemon {
     this.weight = data.weight;
     this.height = data.height;
     this.health = data.health || data.stats[0].base_stat;
-    this.defense = data.defense || 100;
-    this.attack = data.attack || 100;
-    this.speed = data.speed || 100;
+    this.defense = data.defense || data.stats[2].base_stat;
+    this.attack = data.attack || data.stats[1].base_stat;
+    this.speed = data.speed || data.stats[5].base_stat;
     this.types = data.types;
     this.creatorId = data.creatorId;
   }
 
   static wildPokemonTemplate(pokemon) {
-    return `<p onclick="app.WildPokemonController.getActivePokemon('${pokemon.name}')" class="wildin">🎃 ${pokemon.name}</p>`;
+    return `<p onclick="app.WildPokemonController.getActivePokemon('${pokemon.name}')" class="wildin">🔴 ${pokemon.name}</p>`;
+  }
+
+  get myPokemonTemplate() {
+    return `<div class="text-light bg-dark border border-2 border-info rounded mb-1">
+              <p class="mb-0"><img src="${this.img}" alt="${this.name}" />${this.name}</p>
+            </div>`;
   }
 
   get activePokemonTemplate() {
@@ -65,7 +70,7 @@ export class Pokemon {
                     <p>${this.height} dm</p>
                   </div>
                   <div class="text-center">
-                    <button onclick="app." type="button" class="btn btn-outline-dark rounded-pill">Catch Em!</button>
+                    <button onclick="app.SandboxPokemonController.catchPokemon()" type="button" class="btn btn-outline-dark rounded-pill">Catch Em!</button>
                   </div>
                 </div>
               </div>`;

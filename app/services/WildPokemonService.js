@@ -11,7 +11,6 @@ class WildPokemonService {
   async getWildPokemon() {
     const response = await pokeApi.get('pokemon?limit=151');
     AppState.wildPokemon = response.data.results;
-    console.log(AppState.wildPokemon);
   }
 }
 
